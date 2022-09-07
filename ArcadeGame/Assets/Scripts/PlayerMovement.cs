@@ -4,6 +4,20 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    //health bar
+
+    public int maxHealth = 3;
+    public int currentHealth;
+
+    public HealthBar healthBar;
+
+    //fuel bar
+
+    public int maxFuel = 5;
+    public int currentFuel;
+
+    public FuelBar fuelBar;
+
     Rigidbody2D body;
 
     float horizontal;
@@ -32,6 +46,10 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+
+        //healthbar
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     // Update is called once per frame
@@ -72,7 +90,21 @@ public class PlayerMovement : MonoBehaviour
             p1.GetComponent<Rigidbody2D>().velocity = new Vector2(10, projectileSpeed);
             p2.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileSpeed, 0);
         }
+
+        //healthbar
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            TakeDamage(1);
+        }
     }
+
+    void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+
+        healthBar.SetHealth(currentHealth);
+    }
+
     private void FixedUpdate()
     {
         //player movement

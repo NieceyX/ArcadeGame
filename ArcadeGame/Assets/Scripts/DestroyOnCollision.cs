@@ -15,6 +15,6 @@ public class DestroyOnCollision : MonoBehaviour
         if (collision.gameObject.layer == 3)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
+        }   
     }
 }
