@@ -161,6 +161,10 @@ public class PlayerMovement : MonoBehaviour
         this.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + flightHeight);
         originalPlace = this.transform.position;
     }
+    public void AddFuel(int _value)
+    {
+        currentFuel = Mathf.Clamp(currentFuel + _value, 0, maxFuel);
+    }
 
 }
 

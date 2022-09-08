@@ -24,4 +24,6 @@ public class FuelBar : MonoBehaviour
 
         fill.color = gradient.Evaluate(slider.normalizedValue);
     }
+
+    
 }
