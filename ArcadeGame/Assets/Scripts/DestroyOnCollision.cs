@@ -11,10 +11,14 @@ public class DestroyOnCollision : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(collision.gameObject);
         if (collision.gameObject.layer == 3)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }   
+            collision.gameObject.GetComponent<PlayerMovement>().TakeDamage(1);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        else
+        {
+            Destroy(collision.gameObject);
+        }
     }
 }

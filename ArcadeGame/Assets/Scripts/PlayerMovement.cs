@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     float horizontal;
     public float speedOffset = 6f;
     public float runSpeed = 1.1f;
+    Vector2 originalPlace;
 
     //jump parameters
     [Header("Jump Settings")]
@@ -53,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
     {
         body = GetComponent<Rigidbody2D>();
         projectileSpeedVert = projectileSpeed;
+        originalPlace = this.transform.position;
 
         //healthbar
         currentHealth = maxHealth;
@@ -97,19 +100,25 @@ public class PlayerMovement : MonoBehaviour
             p1.GetComponent<Rigidbody2D>().velocity = new Vector2(10, projectileSpeedVert);
             p2.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileSpeed, 0);
         }
-
+        /*
         //healthbar
         if (Input.GetKeyDown(KeyCode.Space))
         {
             TakeDamage(1);
-        }
+        }*/
     }
 
-    void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
 
+        currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
+
+        this.transform.position = originalPlace;
     }
 
     private void FixedUpdate()
@@ -128,6 +137,7 @@ public class PlayerMovement : MonoBehaviour
         flying = true;
         body.gravityScale = 0;
         this.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + flightHeight);
+        originalPlace = this.transform.position;
     }
 
 }
