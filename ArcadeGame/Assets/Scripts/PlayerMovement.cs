@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Fuel Bar")]
     public int maxFuel = 5;
     public int currentFuel;
+
     public FuelBar fuelBar;
 
     //player settings
@@ -62,6 +63,10 @@ public class PlayerMovement : MonoBehaviour
         //healthbar
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+
+        //fuelbar
+        currentFuel = maxFuel;
+        fuelBar.SetMaxFuel(maxFuel);
     }
 
     // Update is called once per frame
@@ -106,11 +111,24 @@ public class PlayerMovement : MonoBehaviour
 
             p1.GetComponent<Rigidbody2D>().velocity = new Vector2(10, projectileSpeedVert);
             p2.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileSpeed, 0);
+
+            //fuelbar
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Damage(1);
+            }
         }
     }
 
-    public void TakeDamage(int damage)
+    void Damage(int damage)
     {
+        currentFuel -= damage;
+        fuelBar.SetFuel(currentFuel);
+    }
+        public void TakeDamage(int damage)
+    {
+        
+
         if (currentHealth <= 0)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -120,6 +138,9 @@ public class PlayerMovement : MonoBehaviour
         healthBar.SetHealth(currentHealth);
 
         this.transform.position = originalPlace;
+        
+        
+        
     }
 
     private void FixedUpdate()

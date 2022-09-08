@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class FuelBar : MonoBehaviour
 {
+
     public Slider slider;
     public Gradient gradient;
     public Image fill;
