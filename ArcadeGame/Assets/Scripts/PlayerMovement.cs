@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     public float flightHeight = 10f;
     Rigidbody2D body;
     float horizontal;
+    float vertical;
     public float speedOffset = 6f;
     public float runSpeed = 1.1f;
     Vector2 originalPlace;
@@ -56,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         projectileSpeedVert = projectileSpeed;
         originalPlace = this.transform.position;
+        vertical = 0;
 
         //healthbar
         currentHealth = maxHealth;
@@ -72,8 +74,13 @@ public class PlayerMovement : MonoBehaviour
         //check for left/right input
         horizontal = Input.GetAxisRaw("Horizontal") + runSpeed;
 
+        if (flying)
+        {
+            vertical = Input.GetAxisRaw("Vertical");
+        }
+
         //jumping code -- jump slightly longer/higher for a longer press
-        if (Input.GetKeyDown(KeyCode.Space) && jumpCooldown < sinceJump && !flying)
+        if (Input.GetKeyDown(KeyCode.W) && jumpCooldown < sinceJump && !flying)
         {
             sinceJump = 0;
             jumping = true;
@@ -85,13 +92,13 @@ public class PlayerMovement : MonoBehaviour
             body.velocity = new Vector2(body.velocity.x, jumpHeight);
             jumpTime += Time.deltaTime;
         }
-        if (Input.GetKeyUp(KeyCode.Space) | jumpTime > buttonTime)
+        if (Input.GetKeyUp(KeyCode.W) || jumpTime > buttonTime)
         {
             jumping = false;
         }
 
         //shooting code
-        if (Input.GetKeyDown(KeyCode.W) && shotCooldown < sinceShot)
+        if (Input.GetKeyDown(KeyCode.Space) && shotCooldown < sinceShot)
         {
             sinceShot = 0;
             GameObject p1 = Instantiate(projectile, this.transform.position, Quaternion.identity);
@@ -124,7 +131,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         //player movement
-        this.transform.position = new Vector2(this.transform.position.x + horizontal/speedOffset, this.transform.position.y);
+        this.transform.position = new Vector2(this.transform.position.x + horizontal/speedOffset, this.transform.position.y + vertical/speedOffset);
         //camera movement
         camera.transform.position = new Vector3(this.transform.position.x + CameraOffset, camera.transform.position.y, camera.transform.position.z);
 
