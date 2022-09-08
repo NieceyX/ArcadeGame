@@ -107,12 +107,6 @@ public class PlayerMovement : MonoBehaviour
             p1.GetComponent<Rigidbody2D>().velocity = new Vector2(10, projectileSpeedVert);
             p2.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileSpeed, 0);
         }
-        /*
-        //healthbar
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TakeDamage(1);
-        }*/
     }
 
     public void TakeDamage(int damage)
