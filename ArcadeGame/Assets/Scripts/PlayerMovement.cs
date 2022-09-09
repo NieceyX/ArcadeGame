@@ -120,10 +120,17 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void Damage(int damage)
+    public void Damage(int damage)
     {
+        if (currentFuel <= 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
         currentFuel -= damage;
         fuelBar.SetFuel(currentFuel);
+
+        //this.transform.position = originalPlace;
     }
         public void TakeDamage(int damage)
     {
