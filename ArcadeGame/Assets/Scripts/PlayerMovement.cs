@@ -71,6 +71,8 @@ public class PlayerMovement : MonoBehaviour
         //fuelbar
         currentFuel = maxFuel;
         fuelBar.SetMaxFuel(maxFuel);
+
+        Time.timeScale = 0;
     }
 
     // Update is called once per frame
@@ -132,6 +134,12 @@ public class PlayerMovement : MonoBehaviour
         {
             Time.timeScale = 1;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        if (Input.GetKeyDown(KeyCode.R) && Time.timeScale == 0)
+        {
+            GameObject canvas = GameObject.Find("Canvas");
+            canvas.transform.Find("StartGame").gameObject.SetActive(false);
+            Time.timeScale = 1;
         }
     }
 
