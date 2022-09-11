@@ -51,7 +51,10 @@ public class PlayerMovement : MonoBehaviour
     public float projectileSpeed = 20f;
     float projectileSpeedVert;
     public float shotCooldown = 3f;
+    public float shotDestroy = 2f;
     float sinceShot = 100;
+    GameObject p1;
+    GameObject p2;
 
     // Start is called before the first frame update
     void Start()
@@ -104,20 +107,25 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //shooting code
+        if (sinceShot >= shotDestroy)
+        {
+            Destroy(p1);
+            Destroy(p2);
+        }
         if (Input.GetKeyDown(KeyCode.Space) && shotCooldown < sinceShot)
         {
             sinceShot = 0;
-            GameObject p1 = Instantiate(projectile, this.transform.position, Quaternion.identity);
-            GameObject p2 = Instantiate(projectile, this.transform.position, Quaternion.identity);
+            p1 = Instantiate(projectile, this.transform.position, Quaternion.identity);
+            p2 = Instantiate(projectile, this.transform.position, Quaternion.identity);
 
             p1.GetComponent<Rigidbody2D>().velocity = new Vector2(10, projectileSpeedVert);
             p2.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileSpeed, 0);
 
-            //fuelbar
+            /*//fuelbar
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 Damage(1);
-            }
+            }*/
         }
 
         if (Input.GetKeyDown(KeyCode.R) && currentHealth <= 0)
