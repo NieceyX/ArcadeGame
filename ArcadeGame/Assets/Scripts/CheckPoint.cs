@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class CheckPoint : MonoBehaviour
 {
+    public GameObject buttonHolder;
+    public UnityEngine.UI.Button planeButton;
+    public UnityEngine.UI.Button truckButton;
+
     bool triggered;
     GameObject player;
     void Start()
@@ -22,8 +26,24 @@ public class CheckPoint : MonoBehaviour
             }
         }
     }
-    void Trigger()
+    public void Trigger()
     {
-        player.GetComponent<PlayerMovement>().Switch();
+        Time.timeScale = 0;
+        planeButton.onClick.AddListener(planeTask);
+        truckButton.onClick.AddListener(truckTask);
+        buttonHolder.SetActive(true);
+    }
+    void planeTask()
+    {
+        player.GetComponent<PlayerMovement>().Plane();
+        buttonHolder.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+    void truckTask()
+    {
+        player.GetComponent<PlayerMovement>().Truck();
+        buttonHolder.SetActive(false);
+        Time.timeScale = 1;
     }
 }

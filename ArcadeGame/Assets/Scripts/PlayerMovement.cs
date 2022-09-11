@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     public float speedOffset = 6f;
     public float runSpeed = 1.1f;
     Vector2 originalPlace;
+    bool checkpoint = false;
 
     //jump parameters
     [Header("Jump Settings")]
@@ -118,6 +119,12 @@ public class PlayerMovement : MonoBehaviour
                 Damage(1);
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.R) && currentHealth <= 0)
+        {
+            Time.timeScale = 1;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     public void Damage(int damage)
@@ -129,25 +136,25 @@ public class PlayerMovement : MonoBehaviour
 
         currentFuel -= damage;
         fuelBar.SetFuel(currentFuel);
-
-        //this.transform.position = originalPlace;
     }
-        public void TakeDamage(int damage)
-    {
-        
 
+    public void TakeDamage(int damage)
+    {
         if (currentHealth <= 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Time.timeScale = 0;
+            GameObject canvas = GameObject.Find("Canvas");
+            canvas.transform.Find("GameOver").gameObject.SetActive(true);
         }
 
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
 
         this.transform.position = originalPlace;
-        
-        
-        
+        if (checkpoint == true)
+        {
+            GameObject.Find("Checkpoint").GetComponent<CheckPoint>().Trigger();
+        }
     }
 
     private void FixedUpdate()
@@ -159,15 +166,34 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    //change to flying variables
-    public void Switch()
+
+    public void Truck()
     {
-        projectileSpeedVert = -projectileSpeed;
-        flying = true;
-        body.gravityScale = 0;
-        this.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + flightHeight);
+        if (flying)
+        {
+            projectileSpeedVert = -projectileSpeed;
+            flying = false;
+            body.gravityScale = 5;
+            this.transform.position = new Vector2(this.transform.position.x + 2, 0);
+        }
         originalPlace = this.transform.position;
+        checkpoint = true;
     }
+
+    //change to flying variables
+    public void Plane()
+    {
+        if (!flying)
+        {
+            projectileSpeedVert = -projectileSpeed;
+            flying = true;
+            body.gravityScale = 0;
+            this.transform.position = new Vector2(this.transform.position.x + 2, flightHeight);
+        }
+        originalPlace = this.transform.position;
+        checkpoint = true;
+    }
+
     public void AddFuel(int _value)
     {
         currentFuel = Mathf.Clamp(currentFuel + _value, 0, maxFuel);
