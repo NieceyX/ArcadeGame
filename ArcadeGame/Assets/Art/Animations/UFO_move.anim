@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: truck_move
+  m_Name: UFO_move
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,11 +20,11 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: b871a2cea28ddf14ebf506c8585e6af9, type: 3}
+      value: {fileID: 21300000, guid: 4c9bc14bb1b3005449aa1ce1613fda60, type: 3}
     - time: 0.1
-      value: {fileID: 21300000, guid: 2b78ad478a23a0b4a8eee2d883121eef, type: 3}
+      value: {fileID: 21300000, guid: 39a186d74bfd5364ba1aede2b12c05e0, type: 3}
     - time: 0.2
-      value: {fileID: 21300000, guid: d01bea7b9d457934fb63f5afb2391ad5, type: 3}
+      value: {fileID: 21300000, guid: 51cce4c01a438ed4f9fd8420c556f5ad, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -44,9 +44,9 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: b871a2cea28ddf14ebf506c8585e6af9, type: 3}
-    - {fileID: 21300000, guid: 2b78ad478a23a0b4a8eee2d883121eef, type: 3}
-    - {fileID: 21300000, guid: d01bea7b9d457934fb63f5afb2391ad5, type: 3}
+    - {fileID: 21300000, guid: 4c9bc14bb1b3005449aa1ce1613fda60, type: 3}
+    - {fileID: 21300000, guid: 39a186d74bfd5364ba1aede2b12c05e0, type: 3}
+    - {fileID: 21300000, guid: 51cce4c01a438ed4f9fd8420c556f5ad, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
