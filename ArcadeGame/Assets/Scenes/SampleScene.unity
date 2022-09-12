@@ -9161,9 +9161,9 @@ GameObject:
   - component: {fileID: 2036009583}
   - component: {fileID: 2036009585}
   - component: {fileID: 2036009582}
+  - component: {fileID: 2036009587}
   - component: {fileID: 2036009581}
   - component: {fileID: 2036009586}
-  - component: {fileID: 2036009587}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -9204,6 +9204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6beb73357a82f64cb88fdd168c8c61f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 2036009587}
   maxHealth: 3
   currentHealth: 0
   healthBar: {fileID: 2034012551}
