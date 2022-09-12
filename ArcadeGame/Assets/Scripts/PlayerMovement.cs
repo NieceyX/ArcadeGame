@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class PlayerMovement : MonoBehaviour
 {
     public Animator animator;
+    
+
 
     //health bar
     [Header("Health Bar")]
@@ -105,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
             sinceJump = 0;
             body.velocity = new Vector2(body.velocity.x, jumpHeight);
             jumpTime += Time.deltaTime;
-            animator.SetBool("isJump", true);
+            
         }
         if (Input.GetKeyUp(KeyCode.W) || jumpTime > buttonTime)
         {
@@ -146,21 +148,11 @@ public class PlayerMovement : MonoBehaviour
             Time.timeScale = 1;
         }
 
-        //set the yVelocity in the animator
-        animator.SetFloat("yVelocity", rb.velocity.y);
+        
     }
 
-    void GroundCheck()
-    {
-        isGrounded = false;
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckCollider.position, groundCheckRadius, groundLayer);
-        if (colliders.Length > 0)
-            isGrounded = true;
 
-        //As long as we are grounded the "Jump" bool
-        //in the animator is disabled
-        animator.SetBool("Jump", !isGrounded);
-    }
+    
 
     public void Damage(int damage)
     {
