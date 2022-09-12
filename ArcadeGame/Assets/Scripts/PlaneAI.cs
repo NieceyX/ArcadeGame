@@ -25,7 +25,7 @@ public class PlaneAI : MonoBehaviour
     {
 
         sinceShot += Time.deltaTime;
-        if (sinceShot >= destroyTime && bullet != null)
+        if (sinceShot >= destroyTime && bullet != null || Time.timeScale == 0)
         {
             Destroy(bullet);
         }
