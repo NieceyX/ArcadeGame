@@ -58,6 +58,9 @@ public class PlayerMovement : MonoBehaviour
     GameObject p1;
     GameObject p2;
 
+    //animation things
+    bool isGrounded = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -98,18 +101,19 @@ public class PlayerMovement : MonoBehaviour
             sinceJump = 0;
             jumping = true;
             jumpTime = 0;
-            
+            animator.SetBool("isJump", true);
+
         }
         if (jumping)
         {
             sinceJump = 0;
             body.velocity = new Vector2(body.velocity.x, jumpHeight);
             jumpTime += Time.deltaTime;
-            animator.SetBool("isJump", true);
         }
         if (Input.GetKeyUp(KeyCode.W) || jumpTime > buttonTime)
         {
             jumping = false;
+            animator.SetBool("isJump", false);
         }
 
         //shooting code
@@ -147,13 +151,13 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //set the yVelocity in the animator
-        animator.SetFloat("yVelocity", rb.velocity.y);
+        animator.SetFloat("yVelocity", body.velocity.y);
     }
 
     void GroundCheck()
     {
         isGrounded = false;
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckCollider.position, groundCheckRadius, groundLayer);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(this.transform.position, 1, 7);
         if (colliders.Length > 0)
             isGrounded = true;
 
