@@ -65,3 +65,6 @@ TagManager:
   - name: Ground_Front_2
     uniqueID: 2295618511
     locked: 0
+  - name: Foreground
+    uniqueID: 1127906389
+    locked: 0
