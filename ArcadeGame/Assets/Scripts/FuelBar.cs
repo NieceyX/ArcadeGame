@@ -18,7 +18,7 @@ public class FuelBar : MonoBehaviour
         fill.color = gradient.Evaluate(1f);
     }
 
-    public void SetFuel(int fuel)
+    public void SetFuel(float fuel)
     {
         slider.value = fuel;
 

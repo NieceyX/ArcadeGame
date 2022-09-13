@@ -19,7 +19,8 @@ public class PlayerMovement : MonoBehaviour
     //fuel bar
     [Header("Fuel Bar")]
     public int maxFuel = 5;
-    public int currentFuel;
+    public float currentFuel;
+    float coef = 0.2f;
 
     public FuelBar fuelBar;
 
@@ -88,6 +89,12 @@ public class PlayerMovement : MonoBehaviour
         sinceJump += Time.deltaTime;
         sinceShot += Time.deltaTime;
 
+        if (Time.timeScale != 0)
+        {
+            FuelDeplete(coef * Time.deltaTime);
+        }
+
+
         //check for left/right input
         horizontal = Input.GetAxisRaw("Horizontal") + runSpeed;
 
@@ -131,11 +138,6 @@ public class PlayerMovement : MonoBehaviour
             p1.GetComponent<Rigidbody2D>().velocity = new Vector2(10, projectileSpeedVert);
             p2.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileSpeed, 0);
 
-            /*//fuelbar
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                Damage(1);
-            }*/
         }
 
         if (Input.GetKeyDown(KeyCode.R) && currentHealth <= 0)
@@ -160,7 +162,7 @@ public class PlayerMovement : MonoBehaviour
 
     
 
-    public void Damage(int damage)
+    public void FuelDeplete(float damage)
     {
         if (currentFuel <= 0)
         {
@@ -184,6 +186,9 @@ public class PlayerMovement : MonoBehaviour
         healthBar.SetHealth(currentHealth);
 
         this.transform.position = originalPlace;
+        currentFuel = maxFuel;
+        fuelBar.SetFuel(currentFuel);
+
         if (checkpoint == true)
         {
             GameObject.Find("Checkpoint").GetComponent<CheckPoint>().Trigger();
@@ -210,6 +215,7 @@ public class PlayerMovement : MonoBehaviour
             this.transform.position = new Vector2(this.transform.position.x + 2, 0);
             this.transform.Find("Truck").gameObject.SetActive(true);
             this.transform.Find("UFO").gameObject.SetActive(false);
+            coef = .2f;
         }
         originalPlace = this.transform.position;
         checkpoint = true;
@@ -223,6 +229,7 @@ public class PlayerMovement : MonoBehaviour
             projectileSpeedVert = -projectileSpeed;
             flying = true;
             body.gravityScale = 0;
+            coef = .4f;
             this.transform.position = new Vector2(this.transform.position.x + 2, flightHeight);
             this.transform.Find("Truck").gameObject.SetActive(false);
             this.transform.Find("UFO").gameObject.SetActive(true);

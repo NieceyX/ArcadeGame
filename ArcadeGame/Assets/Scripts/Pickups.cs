@@ -11,7 +11,7 @@ public class Pickups : MonoBehaviour
         if(collision.tag == "Player")
         {
             collision.GetComponent<PlayerMovement>().AddFuel(fuelValue);
-            gameObject.SetActive(false);
+            this.gameObject.SetActive(false);
         }
     }
 }
