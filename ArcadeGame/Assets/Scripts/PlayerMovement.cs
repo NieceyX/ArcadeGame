@@ -216,10 +216,11 @@ public class PlayerMovement : MonoBehaviour
             projectileSpeedVert = -projectileSpeed;
             flying = false;
             body.gravityScale = 5;
-            this.transform.position = new Vector2(this.transform.position.x + 2, 0);
-            this.transform.Find("Truck").gameObject.SetActive(true);
-            this.transform.Find("UFO").gameObject.SetActive(false);
+            this.transform.position = new Vector2(this.transform.position.x + 3, 0);
+            //this.transform.Find("Truck").gameObject.SetActive(true);
+            //this.transform.Find("UFO").gameObject.SetActive(false);
             coef = .2f;
+            ChangeAvata(true);
         }
         originalPlace = this.transform.position;
         checkpoint = true;
@@ -234,12 +235,14 @@ public class PlayerMovement : MonoBehaviour
             flying = true;
             body.gravityScale = 0;
             coef = .4f;
-            this.transform.position = new Vector2(this.transform.position.x + 2, flightHeight);
-            this.transform.Find("Truck").gameObject.SetActive(false);
-            this.transform.Find("UFO").gameObject.SetActive(true);
+            this.transform.position = new Vector2(this.transform.position.x + 3, flightHeight);
+            //this.transform.Find("Truck").gameObject.SetActive(false);
+            //this.transform.Find("UFO").gameObject.SetActive(true);
+            ChangeAvata(false);
         }
         originalPlace = this.transform.position;
         checkpoint = true;
+        Time.timeScale = 1;
     }
 
     public void AddFuel(int _value)

@@ -47,15 +47,15 @@ public class CheckPoint : MonoBehaviour
     void planeTask()
     {
         player.GetComponent<PlayerMovement>().Plane();
-        player.GetComponent<PlayerMovement>().ChangeAvata(false);
+        //player.GetComponent<PlayerMovement>().ChangeAvata(false);
         buttonHolder.SetActive(false);
-        Time.timeScale = 1;
+
     }
 
     void truckTask()
     {
         player.GetComponent<PlayerMovement>().Truck();
-        player.GetComponent<PlayerMovement>().ChangeAvata(true);
+        //player.GetComponent<PlayerMovement>().ChangeAvata(true);
         buttonHolder.SetActive(false);
         Time.timeScale = 1;
     }
