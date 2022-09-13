@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fbd5565b6c7446a40a03c06ad309e42d
+guid: 76c1acdbf76ff344fae0950189ff35f9
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -116,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Jet Without Bomb_0
+      name: Bomb2_0
       rect:
         serializedVersion: 2
-        x: 11
-        y: 94
-        width: 54
-        height: 20
+        x: 0
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,20 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 237f36632266d8b42b08a542dde78a89
-      internalID: -1325300433
+      spriteID: d88ca9bec177d6346bfe9f507ebb1560
+      internalID: 1877246780
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jet Without Bomb_1
+      name: Bomb2_1
       rect:
         serializedVersion: 2
-        x: 80
-        y: 94
-        width: 43
-        height: 16
+        x: 64
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,20 +151,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 10ee8bef9cb9b1544b063035f98b8197
-      internalID: 2130506335
+      spriteID: 8ce91879ede12124d90507730756379b
+      internalID: 987463287
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jet Without Bomb_2
+      name: Bomb2_2
       rect:
         serializedVersion: 2
-        x: 11
-        y: 32
-        width: 45
-        height: 17
+        x: 0
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,20 +172,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a73a83a207d8834b97f076549961993
-      internalID: -441887732
+      spriteID: 151229dd809d9824eab580e5a74a58db
+      internalID: 1733651785
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jet Without Bomb_3
+      name: Bomb2_3
       rect:
         serializedVersion: 2
-        x: 78
-        y: 34
-        width: 46
-        height: 17
+        x: 64
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,8 +193,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed3e676a318fd6a4eb0059db4f6c7285
-      internalID: -388246313
+      spriteID: c9a7c11e46ef46349a669efe6882bb1d
+      internalID: -679951029
       vertices: []
       indices: 
       edges: []
@@ -210,10 +210,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Jet Without Bomb_2: -441887732
-      Jet Without Bomb_1: 2130506335
-      Jet Without Bomb_0: -1325300433
-      Jet Without Bomb_3: -388246313
+      Bomb2_2: 1733651785
+      Bomb2_1: 987463287
+      Bomb2_3: -679951029
+      Bomb2_0: 1877246780
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
