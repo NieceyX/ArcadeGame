@@ -20,7 +20,7 @@ public class PlaneAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        projectile = (GameObject)Resources.Load("Prefabs/EnemyProjectile", typeof(GameObject));
+        projectile = (GameObject)Resources.Load("Prefabs/EnemyProjectile2", typeof(GameObject));
     }
 
     // Update is called once per frame

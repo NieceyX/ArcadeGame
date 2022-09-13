@@ -7,8 +7,8 @@ public class PlayerMovement : MonoBehaviour
 {
     public Animator truckAnimator;
     public Animator UFOAnimator;
-    //public GameObject truckImage;
-    //public GameObject UFOImage;
+    public GameObject truckImage;
+    public GameObject UFOImage;
 
 
     //health bar
@@ -111,20 +111,20 @@ public class PlayerMovement : MonoBehaviour
             sinceJump = 0;
             jumping = true;
             jumpTime = 0;
-           // truckAnimator.SetBool("isJump", true);
+           truckAnimator.SetBool("isJump", true);
         }
         if (jumping)
         {
             sinceJump = 0;
             body.velocity = new Vector2(body.velocity.x, jumpHeight);
             jumpTime += Time.deltaTime;
-            //truckAnimator.SetFloat("yVelocity", body.velocity.y);
+            truckAnimator.SetFloat("yVelocity", body.velocity.y);
             //Debug.Log("yVelocity" + transform.position.y);
         }
         if (Input.GetKeyUp(KeyCode.W) || jumpTime > buttonTime)
         {
             jumping = false;
-           // truckAnimator.SetBool("isJump", false);
+            truckAnimator.SetBool("isJump", false);
         }
 
         //shooting code
@@ -247,11 +247,11 @@ public class PlayerMovement : MonoBehaviour
         currentFuel = Mathf.Clamp(currentFuel + _value, 0, maxFuel);
     }
 
-   /* public void ChangeAvata(bool isTruck)
+    public void ChangeAvata(bool isTruck)
     {
         truckImage.SetActive(isTruck ? true : false);
         UFOImage.SetActive(isTruck ? false : true);
-    }*/
+    }
 
 }
 
