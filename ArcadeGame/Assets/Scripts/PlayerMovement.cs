@@ -13,7 +13,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("Health Bar")]
     public int maxHealth = 3;
     public int currentHealth;
-    int tracker = 3;
 
     public HealthBar healthBar;
 
@@ -154,13 +153,6 @@ public class PlayerMovement : MonoBehaviour
             GameObject canvas = GameObject.Find("Canvas");
             canvas.transform.Find("StartGame").gameObject.SetActive(false);
             Time.timeScale = 1;
-        }
-
-        if (tracker > currentHealth && currentHealth > 0)
-        {
-            Time.timeScale = 0;
-            Time.timeScale = 1;
-            tracker = currentHealth;
         }
         
     }
