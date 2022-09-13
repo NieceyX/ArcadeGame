@@ -13,7 +13,7 @@ public class TruckAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        projectile = (GameObject)Resources.Load("Prefabs/EnemyProjectile", typeof(GameObject));
+        projectile = (GameObject)Resources.Load("Prefabs/EnemyProjectile1", typeof(GameObject));
     }
 
     // Update is called once per frame
