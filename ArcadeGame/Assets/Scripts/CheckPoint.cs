@@ -8,6 +8,8 @@ public class CheckPoint : MonoBehaviour
     public UnityEngine.UI.Button planeButton;
     public UnityEngine.UI.Button truckButton;
 
+    public bool end;
+
     bool triggered;
     GameObject player;
     void Start()
@@ -21,8 +23,17 @@ public class CheckPoint : MonoBehaviour
         {
             if (collider.gameObject.layer == 3)
             {
-                player = collider.gameObject;
-                Trigger();
+                if (end)
+                {
+                    buttonHolder.SetActive(true);
+                    collider.GetComponent<PlayerMovement>().end = true;
+                    Time.timeScale = 0;
+                }
+                else
+                {
+                    player = collider.gameObject;
+                    Trigger();
+                }
             }
         }
     }

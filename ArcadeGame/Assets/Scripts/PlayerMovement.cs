@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Health Bar")]
     public int maxHealth = 3;
     public int currentHealth;
+    int tracker = 3;
 
     public HealthBar healthBar;
 
@@ -33,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
     public float runSpeed = 1.1f;
     Vector2 originalPlace;
     bool checkpoint = false;
+
+    public bool end = false;
 
     //jump parameters
     [Header("Jump Settings")]
@@ -120,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
             Destroy(p1);
             Destroy(p2);
         }
-        if (Input.GetKeyDown(KeyCode.Space) && shotCooldown < sinceShot)
+        if (Input.GetKeyDown(KeyCode.Space) && shotCooldown < sinceShot && Time.timeScale != 0)
         {
             sinceShot = 0;
             p1 = Instantiate(projectile, this.transform.position, Quaternion.identity);
@@ -141,6 +144,11 @@ public class PlayerMovement : MonoBehaviour
             Time.timeScale = 1;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+        if (Input.GetKeyDown(KeyCode.R) && end)
+        {
+            Time.timeScale = 1;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
         if (Input.GetKeyDown(KeyCode.R) && Time.timeScale == 0)
         {
             GameObject canvas = GameObject.Find("Canvas");
@@ -148,6 +156,12 @@ public class PlayerMovement : MonoBehaviour
             Time.timeScale = 1;
         }
 
+        if (tracker > currentHealth && currentHealth > 0)
+        {
+            Time.timeScale = 0;
+            Time.timeScale = 1;
+            tracker = currentHealth;
+        }
         
     }
 
@@ -202,6 +216,8 @@ public class PlayerMovement : MonoBehaviour
             flying = false;
             body.gravityScale = 5;
             this.transform.position = new Vector2(this.transform.position.x + 2, 0);
+            this.transform.Find("Truck").gameObject.SetActive(true);
+            this.transform.Find("UFO").gameObject.SetActive(false);
         }
         originalPlace = this.transform.position;
         checkpoint = true;
@@ -216,6 +232,8 @@ public class PlayerMovement : MonoBehaviour
             flying = true;
             body.gravityScale = 0;
             this.transform.position = new Vector2(this.transform.position.x + 2, flightHeight);
+            this.transform.Find("Truck").gameObject.SetActive(false);
+            this.transform.Find("UFO").gameObject.SetActive(true);
         }
         originalPlace = this.transform.position;
         checkpoint = true;
