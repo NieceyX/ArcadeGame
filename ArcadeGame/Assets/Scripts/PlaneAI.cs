@@ -11,6 +11,9 @@ public class PlaneAI : MonoBehaviour
     GameObject bullet = null;
     public float projectileSpeed = -15f;
 
+    public float delay = 0;
+    float delayTime = 0;
+
     public float speedOffset = 30f;
     public float runSpeed = 1.1f;
 
@@ -25,11 +28,13 @@ public class PlaneAI : MonoBehaviour
     {
 
         sinceShot += Time.deltaTime;
+        delayTime += Time.deltaTime;
+
         if (sinceShot >= destroyTime && bullet != null || Time.timeScale == 0)
         {
             Destroy(bullet);
         }
-        if (sinceShot >= shootTime)
+        if (sinceShot >= shootTime && delayTime > delay)
         {
             //shoot
             sinceShot = 0;
@@ -40,7 +45,11 @@ public class PlaneAI : MonoBehaviour
     private void FixedUpdate()
     {
         //player movement
-        this.transform.position = new Vector2(this.transform.position.x +runSpeed / speedOffset, this.transform.position.y);
+        if (delayTime > delay)
+        {
+            this.transform.position = new Vector2(this.transform.position.x + runSpeed / speedOffset, this.transform.position.y);
+        }
+
 
     }
 }

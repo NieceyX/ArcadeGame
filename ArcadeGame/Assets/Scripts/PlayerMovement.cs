@@ -7,8 +7,8 @@ public class PlayerMovement : MonoBehaviour
 {
     public Animator truckAnimator;
     public Animator UFOAnimator;
-    public GameObject truckImage;
-    public GameObject UFOImage;
+    //public GameObject truckImage;
+    //public GameObject UFOImage;
 
 
     //health bar
@@ -21,7 +21,8 @@ public class PlayerMovement : MonoBehaviour
     //fuel bar
     [Header("Fuel Bar")]
     public int maxFuel = 5;
-    public int currentFuel;
+    public float currentFuel;
+    float coef = 0.2f;
 
     public FuelBar fuelBar;
 
@@ -35,6 +36,8 @@ public class PlayerMovement : MonoBehaviour
     public float runSpeed = 1.1f;
     Vector2 originalPlace;
     bool checkpoint = false;
+
+    public bool end = false;
 
     //jump parameters
     [Header("Jump Settings")]
@@ -88,6 +91,12 @@ public class PlayerMovement : MonoBehaviour
         sinceJump += Time.deltaTime;
         sinceShot += Time.deltaTime;
 
+        if (Time.timeScale != 0)
+        {
+            FuelDeplete(coef * Time.deltaTime);
+        }
+
+
         //check for left/right input
         horizontal = Input.GetAxisRaw("Horizontal") + runSpeed;
 
@@ -102,20 +111,20 @@ public class PlayerMovement : MonoBehaviour
             sinceJump = 0;
             jumping = true;
             jumpTime = 0;
-            truckAnimator.SetBool("isJump", true);
+           // truckAnimator.SetBool("isJump", true);
         }
         if (jumping)
         {
             sinceJump = 0;
             body.velocity = new Vector2(body.velocity.x, jumpHeight);
             jumpTime += Time.deltaTime;
-            truckAnimator.SetFloat("yVelocity", body.velocity.y);
-            Debug.Log("yVelocity" + transform.position.y);
+            //truckAnimator.SetFloat("yVelocity", body.velocity.y);
+            //Debug.Log("yVelocity" + transform.position.y);
         }
         if (Input.GetKeyUp(KeyCode.W) || jumpTime > buttonTime)
         {
             jumping = false;
-            truckAnimator.SetBool("isJump", false);
+           // truckAnimator.SetBool("isJump", false);
         }
 
         //shooting code
@@ -124,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
             Destroy(p1);
             Destroy(p2);
         }
-        if (Input.GetKeyDown(KeyCode.Space) && shotCooldown < sinceShot)
+        if (Input.GetKeyDown(KeyCode.Space) && shotCooldown < sinceShot && Time.timeScale != 0)
         {
             sinceShot = 0;
             p1 = Instantiate(projectile, this.transform.position, Quaternion.identity);
@@ -133,14 +142,14 @@ public class PlayerMovement : MonoBehaviour
             p1.GetComponent<Rigidbody2D>().velocity = new Vector2(10, projectileSpeedVert);
             p2.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileSpeed, 0);
 
-            /*//fuelbar
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                Damage(1);
-            }*/
         }
 
         if (Input.GetKeyDown(KeyCode.R) && currentHealth <= 0)
+        {
+            Time.timeScale = 1;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        if (Input.GetKeyDown(KeyCode.R) && end)
         {
             Time.timeScale = 1;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -151,14 +160,13 @@ public class PlayerMovement : MonoBehaviour
             canvas.transform.Find("StartGame").gameObject.SetActive(false);
             Time.timeScale = 1;
         }
-
         
     }
 
 
     
 
-    public void Damage(int damage)
+    public void FuelDeplete(float damage)
     {
         if (currentFuel <= 0)
         {
@@ -182,6 +190,9 @@ public class PlayerMovement : MonoBehaviour
         healthBar.SetHealth(currentHealth);
 
         this.transform.position = originalPlace;
+        currentFuel = maxFuel;
+        fuelBar.SetFuel(currentFuel);
+
         if (checkpoint == true)
         {
             GameObject.Find("Checkpoint").GetComponent<CheckPoint>().Trigger();
@@ -206,6 +217,9 @@ public class PlayerMovement : MonoBehaviour
             flying = false;
             body.gravityScale = 5;
             this.transform.position = new Vector2(this.transform.position.x + 2, 0);
+            this.transform.Find("Truck").gameObject.SetActive(true);
+            this.transform.Find("UFO").gameObject.SetActive(false);
+            coef = .2f;
         }
         originalPlace = this.transform.position;
         checkpoint = true;
@@ -219,7 +233,10 @@ public class PlayerMovement : MonoBehaviour
             projectileSpeedVert = -projectileSpeed;
             flying = true;
             body.gravityScale = 0;
+            coef = .4f;
             this.transform.position = new Vector2(this.transform.position.x + 2, flightHeight);
+            this.transform.Find("Truck").gameObject.SetActive(false);
+            this.transform.Find("UFO").gameObject.SetActive(true);
         }
         originalPlace = this.transform.position;
         checkpoint = true;
@@ -230,11 +247,11 @@ public class PlayerMovement : MonoBehaviour
         currentFuel = Mathf.Clamp(currentFuel + _value, 0, maxFuel);
     }
 
-    public void ChangeAvata(bool isTruck)
+   /* public void ChangeAvata(bool isTruck)
     {
         truckImage.SetActive(isTruck ? true : false);
         UFOImage.SetActive(isTruck ? false : true);
-    }
+    }*/
 
 }
 

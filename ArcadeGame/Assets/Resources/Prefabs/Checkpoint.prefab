@@ -130,6 +130,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00c32a8f98ea9ad4fa8197c59690132e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonHolder: {fileID: 0}
+  planeButton: {fileID: 0}
+  truckButton: {fileID: 0}
+  end: 0
 --- !u!61 &4290887023293710775
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -143,7 +147,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 3}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -154,5 +158,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 3}
+  m_Size: {x: 1, y: 10}
   m_EdgeRadius: 0

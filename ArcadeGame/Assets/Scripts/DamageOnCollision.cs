@@ -8,6 +8,11 @@ public class DamageOnCollision : MonoBehaviour
     {
         if (collision.gameObject.layer == 3)
         {
+            GameObject[] items = GameObject.FindGameObjectsWithTag("Bullet");
+            foreach(GameObject item in items)
+            {
+                Destroy(item);
+            }
             collision.gameObject.GetComponent<PlayerMovement>().TakeDamage(1);
         }
     }
